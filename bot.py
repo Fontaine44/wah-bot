@@ -27,5 +27,11 @@ def wall_of_shame_event():
     commands.wall_of_shame(request.form.get('channel_id'), client)
     return Response(), 200
 
+
+@app.route('/surunwah', methods=['POST'])
+def sur_un_wah_event():
+    commands.sur_un_wah(request.form.get('channel_id'), client)
+    return Response(), 200
+
 if __name__ == "__main__":
     app.run(debug=True)

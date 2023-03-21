@@ -1,12 +1,13 @@
 import json
 import utils
+import random
 from slack import WebClient
 
 
 # /wallofshame command
 def wall_of_shame(channel_id: str, client: WebClient) -> None:
 
-    bot_message = "This is the current wall of shame: \n"
+    bot_message = "This is the current wall of shame: \n\n"
 
     wall_of_shame = dict()
 
@@ -37,3 +38,20 @@ def wall_of_shame(channel_id: str, client: WebClient) -> None:
         bot_message += "\nShame on you!"
 
         client.chat_postMessage(channel=channel_id,text=bot_message)
+
+
+# /surunwah command
+def sur_un_wah(channel_id: str, client: WebClient) -> None:
+
+    roll = random.randrange(1, 6)
+
+    filename = f"./images/dice_roll_{roll}.png"
+
+    client.files_upload(    
+        file=filename,
+        initial_comment="And your dice roll is...",
+        channels=channel_id
+    )
+
+    if roll == 5:
+        client.chat_postMessage(channel=channel_id,text="lol")
