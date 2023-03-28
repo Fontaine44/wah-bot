@@ -2,3 +2,4 @@ slackclient
 flask
 slackeventsapi
 python-dotenv
+gunicorn
