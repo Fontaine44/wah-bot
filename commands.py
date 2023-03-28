@@ -11,10 +11,6 @@ def wall_of_shame(payload: dict, client: WebClient) -> None:
     channel_id = payload.get('channel_id')
     user_id = payload.get('user_id')
 
-
-    
-
-
     date_time = datetime.now(ZoneInfo("America/Montreal"))
     date_time = date_time.strftime("%Y-%m-%d, %H:%M:%S")
 
@@ -51,7 +47,9 @@ def wall_of_shame(payload: dict, client: WebClient) -> None:
 
 
 # /surunwah command
-def sur_un_wah(channel_id: str, client: WebClient) -> None:
+def sur_un_wah(payload: str, client: WebClient) -> None:
+    channel_id = payload.get('channel_id')
+    user_id = payload.get('user_id')
 
     roll = random.randrange(1, 6)
 
@@ -59,7 +57,7 @@ def sur_un_wah(channel_id: str, client: WebClient) -> None:
 
     client.files_upload(    
         file=filename,
-        initial_comment="And your dice roll is...",
+        initial_comment=f"<@{user_id}>, your dice roll is...",
         channels=channel_id
     )
 
