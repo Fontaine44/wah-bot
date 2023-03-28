@@ -41,5 +41,10 @@ def sur_un_wah_event():
     commands.sur_un_wah(request.form.get('channel_id'), client)
     return Response(), 200
 
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return "healthy"
+
 if __name__ == "__main__":
     app.run(debug=True)
