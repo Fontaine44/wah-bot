@@ -60,10 +60,10 @@ def count_wah(text):
 
 def get_users():
     response = requests.get(bot.USERS_URL)
-    users = json.loads(response.json())
+    users = response.json()
     return users
 
 
 def update_users(users):
-    requests.put(url=bot.USERS_URL, json=json.dumps(users))
+    requests.put(url=bot.USERS_URL, json=users)
     return users
