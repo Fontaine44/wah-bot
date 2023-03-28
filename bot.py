@@ -9,13 +9,15 @@ from slackeventsapi import SlackEventAdapter
 
 
 # Setup secrets
-load_dotenv()
+if not load_dotenv(".env"):
+    raise RuntimeError("No environment variables were set.")
 
 SLACK_TOKEN = os.getenv("SLACK_TOKEN")
 SIGNING_SECRET = os.getenv("SIGNING_SECRET")
+USERS_URL = os.getenv("USERS_URL")
 
 # Verify secrets are set
-utils.checkSecrets(SLACK_TOKEN, SIGNING_SECRET)
+utils.checkSecrets(SLACK_TOKEN, SIGNING_SECRET, USERS_URL)
 
 
 app = Flask(__name__)

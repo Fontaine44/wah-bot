@@ -39,9 +39,12 @@ def max_wah(wall_of_shame: dict) -> list:
 
 
 # Raises an error if the secret is None
-def checkSecrets(token, signing):
+def checkSecrets(token, signing, users_url):
     if (token is None):
         raise RuntimeError("SLACK_TOKEN environment variable is missing")
     
     if (signing is None):
         raise RuntimeError("SIGNING_SECRET environment variable is missing")
+    
+    if (users_url is None):
+        raise RuntimeError("USERS_URL environment variable is missing")
