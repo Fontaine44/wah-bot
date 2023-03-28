@@ -4,12 +4,12 @@ import message
 import commands
 import utils
 from dotenv import load_dotenv
-from flask import Flask, Response, request
+from flask import Flask, Response, request, jsonify
 from slackeventsapi import SlackEventAdapter
 
 
 # Setup secrets
-if not load_dotenv(".env"):
+if not load_dotenv(".env.dev"):
     raise RuntimeError("No environment variables were set.")
 
 SLACK_TOKEN = os.getenv("SLACK_TOKEN")
@@ -45,6 +45,17 @@ def sur_un_wah_event():
 @app.route('/health', methods=['GET'])
 def health_check():
     return "healthy"
+
+
+@app.route('/users', methods=['GET', 'POST'])
+def users():
+    if request.method == "GET":
+        return message.get_users()
+    if request.method == "POST":
+        new_users = request.get_json()
+        users = message.update_users(new_users)
+        return jsonify(users)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
