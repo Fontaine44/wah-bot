@@ -37,3 +37,11 @@ def max_wah(wall_of_shame: dict) -> list:
             max_shamers.append((user, wall_of_shame.pop(user)))
     return max_shamers
 
+
+# Raises an error if the secret is None
+def checkSecrets(token, signing):
+    if (token is None):
+        raise RuntimeError("SLACK_TOKEN environment variable is missing")
+    
+    if (signing is None):
+        raise RuntimeError("SIGNING_SECRET environment variable is missing")

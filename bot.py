@@ -2,14 +2,20 @@ import os
 import slack
 import message
 import commands
+import utils
 from dotenv import load_dotenv
 from flask import Flask, Response, request
 from slackeventsapi import SlackEventAdapter
 
+
+# Setup secrets
 load_dotenv()
 
 SLACK_TOKEN = os.getenv("SLACK_TOKEN")
 SIGNING_SECRET = os.getenv("SIGNING_SECRET")
+
+# Verify secrets are set
+utils.checkSecrets(SLACK_TOKEN, SIGNING_SECRET)
 
 
 app = Flask(__name__)
