@@ -4,3 +4,4 @@ slackeventsapi
 python-dotenv
 gunicorn
 requests
+zoneinfo
