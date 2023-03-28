@@ -17,7 +17,7 @@ def wall_of_shame(payload: dict, client: WebClient) -> None:
     date_time = datetime.now(ZoneInfo("America/Montreal"))
     date_time = date_time.strftime("%Y-%m-%d, %H:%M:%S")
 
-    bot_message = f"Hey <@{user_id}>,\nhere his the current wall of shame as of _{date_time}_ : \n\n"
+    bot_message = f"Hey <@{user_id}>,\nHere is the current wall of shame as of _{date_time}_ : \n\n"
 
     wall_of_shame = dict()
 
