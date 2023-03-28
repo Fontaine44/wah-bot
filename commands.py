@@ -2,8 +2,11 @@ import random
 import message
 import utils
 from datetime import datetime
-from zoneinfo import ZoneInfo
 from slack import WebClient
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    from backports.zoneinfo import ZoneInfo # type: ignore
 
 
 # /wallofshame command
