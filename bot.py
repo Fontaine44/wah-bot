@@ -9,7 +9,7 @@ from slackeventsapi import SlackEventAdapter
 
 
 # Setup secrets
-if not load_dotenv(".env.dev"):
+if not load_dotenv():
     raise RuntimeError("No environment variables were set.")
 
 SLACK_TOKEN = os.getenv("SLACK_TOKEN")
@@ -40,7 +40,6 @@ def wall_of_shame_event():
 def sur_un_wah_event():
     commands.sur_un_wah(request.form, client)
     return Response(), 200
-
 
 
 @app.route('/health', methods=['GET'])
