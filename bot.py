@@ -32,7 +32,7 @@ def message_event(payload):
 
 @app.route('/wallofshame', methods=['POST'])
 def wall_of_shame_event():
-    commands.wall_of_shame(request.form.get('channel_id'), client)
+    commands.wall_of_shame(request.form, client)
     return Response(), 200
 
 
