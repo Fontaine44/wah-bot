@@ -15,9 +15,10 @@ if not load_dotenv():
 SLACK_TOKEN = os.getenv("SLACK_TOKEN")
 SIGNING_SECRET = os.getenv("SIGNING_SECRET")
 USERS_URL = os.getenv("USERS_URL")
+JOKES_URL = os.getenv("JOKES_URL")
 
 # Verify secrets are set
-utils.checkSecrets(SLACK_TOKEN, SIGNING_SECRET, USERS_URL)
+utils.check_secrets(SLACK_TOKEN, SIGNING_SECRET, USERS_URL, JOKES_URL)
 
 
 app = Flask(__name__)
@@ -39,6 +40,11 @@ def wall_of_shame_event():
 @app.route('/surunwah', methods=['POST'])
 def sur_un_wah_event():
     commands.sur_un_wah(request.form, client)
+    return Response(), 200
+
+@app.route('/joke', methods=['POST'])
+def joke_event():
+    commands.joke(request.form, client)
     return Response(), 200
 
 

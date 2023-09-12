@@ -4,4 +4,5 @@ slackeventsapi
 python-dotenv
 gunicorn
 requests
+pandas
 backports.zoneinfo;python_version<"3.9"

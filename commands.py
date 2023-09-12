@@ -70,3 +70,12 @@ def sur_un_wah(payload: str, client: WebClient) -> None:
 
     if roll == 5:
         client.chat_postMessage(channel=channel_id,text="lol")
+
+
+# /joke command
+def joke(payload: str, client: WebClient) -> None:
+    channel_id = payload.get('channel_id')
+
+    joke = utils.get_joke()
+
+    client.chat_postMessage(channel=channel_id,text=joke)

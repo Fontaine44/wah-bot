@@ -1,3 +1,7 @@
+import os
+import random
+import pandas
+
 
 # Replace 5 and 7 in a string
 def parse_wah(text: str) -> str:
@@ -39,7 +43,7 @@ def max_wah(wall_of_shame: dict) -> list:
 
 
 # Raises an error if the secret is None
-def checkSecrets(token, signing, users_url):
+def check_secrets(token, signing, users_url, jokes_url):
     if (token is None):
         raise RuntimeError("SLACK_TOKEN environment variable is missing")
     
@@ -48,3 +52,14 @@ def checkSecrets(token, signing, users_url):
     
     if (users_url is None):
         raise RuntimeError("USERS_URL environment variable is missing")
+    
+    if (jokes_url is None):
+        raise RuntimeError("JOKES_URL environment variable is missing")
+    
+
+# Returns a joke
+def get_joke() -> str:
+    url = os.getenv("JOKES_URL")
+    df = pandas.read_csv(url)
+    ind = random.randint(0, len(df.index) - 1)
+    return df.iloc[ind]["Joke"]
