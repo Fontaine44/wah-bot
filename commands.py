@@ -75,7 +75,9 @@ def sur_un_wah(payload: str, client: WebClient) -> None:
 # /joke command
 def joke(payload: str, client: WebClient) -> None:
     channel_id = payload.get('channel_id')
-
+    user_id = payload.get('user_id')
+    
     joke = utils.get_joke()
+    bot_message = f"<@{user_id}>\n" + joke
 
-    client.chat_postMessage(channel=channel_id,text=joke)
+    client.chat_postMessage(channel=channel_id,text=bot_message)
