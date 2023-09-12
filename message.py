@@ -9,7 +9,7 @@ from slack import WebClient
 def handler(payload: dict, client: WebClient) -> None:
     event = payload.get('event', {})
 
-    if event.get('bot_id') == "B04T2AW8T9A":
+    if event.get('user') in ["U04SWUHV4MT", "U04TDTFA9L1"]:
         return
 
     text = event.get('text')
