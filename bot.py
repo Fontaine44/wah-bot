@@ -6,6 +6,7 @@ import utils
 from dotenv import load_dotenv
 from flask import Flask, Response, request, jsonify
 from slackeventsapi import SlackEventAdapter
+from threading import Thread
 
 
 # Setup secrets
@@ -16,6 +17,7 @@ SLACK_TOKEN = os.getenv("SLACK_TOKEN")
 SIGNING_SECRET = os.getenv("SIGNING_SECRET")
 USERS_URL = os.getenv("USERS_URL")
 JOKES_URL = os.getenv("JOKES_URL")
+TENOR_KEY = os.getenv("TENOR_KEY")
 
 # Verify secrets are set
 utils.check_secrets(SLACK_TOKEN, SIGNING_SECRET, USERS_URL, JOKES_URL)
@@ -45,6 +47,11 @@ def sur_un_wah_event():
 @app.route('/joke', methods=['POST'])
 def joke_event():
     commands.joke(request.form, client)
+    return Response(), 200
+
+@app.route('/rats', methods=['POST'])
+def rats_event():
+    Thread(target=commands.rats, args=[request.form, client]).start()
     return Response(), 200
 
 

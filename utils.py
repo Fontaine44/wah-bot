@@ -1,6 +1,7 @@
 import os
 import random
 import pandas
+import requests
 
 
 # Replace 5 and 7 in a string
@@ -63,3 +64,19 @@ def get_joke() -> str:
     df = pandas.read_csv(url)
     ind = random.randint(0, len(df.index) - 1)
     return df.iloc[ind]["Joke"]
+
+
+# Returns the temporary filepath to a gif of rats
+def get_rat() -> str:
+    key = os.getenv("TENOR_KEY")
+    url = f"https://tenor.googleapis.com/v2/search?q=rats&key={key}&client_key=wah-bot&random=true&limit=1"
+    
+    r = requests.get(url)
+    content = r.json()
+    gif_url = content["results"][0]["media_formats"]["gif"]["url"]
+
+    r = requests.get(gif_url)
+    with open('/tmp/rats.gif', 'wb') as f:
+        f.write(requests.get(gif_url).content)
+    
+    return "/tmp/rats.gif"

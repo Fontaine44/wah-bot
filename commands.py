@@ -81,3 +81,16 @@ def joke(payload: str, client: WebClient) -> None:
     bot_message = f"<@{user_id}>\n" + joke
 
     client.chat_postMessage(channel=channel_id,text=bot_message)
+
+# /rats command
+def rats(payload: str, client: WebClient) -> None:
+    channel_id = payload.get('channel_id')
+    user_id = payload.get('user_id')
+
+    filename = utils.get_rat()
+
+    client.files_upload(    
+        file=filename,
+        initial_comment=f"<@{user_id}>",
+        channels=channel_id
+    )
